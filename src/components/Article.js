@@ -1,18 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
+import Comment from './Comment'
 
-export default class Article extends Component {
-    state = {
-        isOpen: false
-    }
-
-/*
-    constructor() {
-        super()
+export default class Article extends React.Component {
+    constructor(props) {
+        super(props);
         this.state = {
             isOpen: false
         }
     }
-*/
 
     render() {
         const { article } = this.props
@@ -35,6 +30,7 @@ export default class Article extends Component {
         return (
             <section>
                 {this.props.article.text}
+                <Comment comments={ this.props.article.comments } />
             </section>
         )
     }
