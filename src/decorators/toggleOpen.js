@@ -10,7 +10,8 @@ export default function toggleOpen(Component) {
             return <Component {...this.props} {...this.state} toggleOpen = {this.toggleOpen}/>
         }
 
-        toggleOpen = (ev) => {
+        toggleOpen = ev => {
+          console.log(this.props.id);
             ev && ev.preventDefault && ev.preventDefault()
             this.setState({
                 isOpen: !this.state.isOpen
