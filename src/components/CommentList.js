@@ -1,8 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 
 class CommentList extends Component {
+    static PropTypes = {
+      comments: PropTypes.array,
+      isOpen: PropTypes.bool
+    }
+
     static defaultProps = {
         comments: []
     }
@@ -33,9 +38,11 @@ class CommentList extends Component {
     }
 
     getLink() {
-        return <a href="#" onClick = {this.props.toggleOpen}>
+      return (
+          <a href="#" onClick = {this.props.toggleOpen}>
             {this.props.isOpen ? 'hide' : 'show'} comments
-        </a>
+          </a>
+      )
     }
 
     getBody() {

@@ -1,39 +1,59 @@
 import React, {PropTypes} from 'react'
 import Article from './Article'
 import Chart from './Chart'
+import toggleOpen from '../decorators/toggleOpen'
 
 export default class ArticleList extends React.Component {
+    static propTypes = {
+      articles: PropTypes.array.isRequired
+    }
+
+    static defaultProps = {
+        articles: []
+    }
+
     state = {
         openArticleId: null
     }
+
     render() {
-        const {articles} = this.props
-        const articleElements = articles.map(article =>
-            <li key={article.id}>
-                <Article article={article}
-                         isOpen={this.state.openArticleId == article.id}
-                         onClick={this.toggleOpenArticle(article.id)}
-                />
-            </li>)
         return (
             <div>
                 <h2>Article List</h2>
                 <ul>
-                    {/*some comment*/}
-                    {articleElements}
+                    {this.getArticle()}
                 </ul>
-                <Chart articles={articles}/>
             </div>
         )
     }
 
-    toggleOpenArticle = id => ev => {
-        this.setState({
-            openArticleId: id
-        })
-    }
-}
 
-ArticleList.propTypes = {
-    articles: PropTypes.array.isRequired
+    getArticle() {
+      const { articles } = this.props
+      const articleItems = articles.map(article => {
+          return (
+            <li key = {article.id}>
+              <Article
+                       onUpdate={this.onUpdate}
+                       isOpen={this.state.openArticleId == article.id}
+                       article = {article}
+              />
+            </li>
+          )
+      })
+      return <ul>{articleItems}</ul>
+    }
+
+    onUpdate = (val) => {
+      console.log('onUpdate', val);
+      this.toggleOpenArticle(val);
+    }
+
+    toggleOpenArticle = (id) => {
+     let state = this.state.openArticleId === id ? null : id;
+     console.log('sstate', this.state.openArticleId, id, state);
+       this.setState({
+           openArticleId: state
+       })
+    }
 }

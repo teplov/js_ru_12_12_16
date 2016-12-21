@@ -1,32 +1,63 @@
 import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
+import toggleOpen from '../decorators/toggleOpen'
 
-export default class Article extends Component {
+class Article extends Component {
     static propTypes = {
-        article: PropTypes.object.isRequired
+        article: PropTypes.object.isRequired,
+        isOpen: PropTypes.bool,
+        onUpdate: PropTypes.func
+    }
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        isOpen: this.props.isOpen
+      }
     }
 
     componentDidMount() {
         console.log('---', this.refs.container)
     }
 
+    componentWillUpdate (nextProps) {
+      console.log(nextProps);
+    }
+
     render() {
-        const { article, onClick } = this.props
         return (
             <div ref = "container">
-                <h3 onClick = {onClick}>{article.title}</h3>
+                {this.getTitle()}
                 {this.getBody()}
             </div>
         )
     }
 
+    getTitle() {
+        const { article: { title } } = this.props
+        return  (
+            <h3 onClick={this.update}>
+                {title}
+            </h3>
+        )
+    }
+
+    update = () => {
+        this.props.toggleOpen();
+        this.props.onUpdate(this.props.article.id);
+    }
+
+
     getBody() {
-        if (!this.props.isOpen) return null
+        const { article, isOpen } = this.props
+        if (!isOpen) return null
         return (
             <section>
-                {this.props.article.text}
+                {article.text}
                 <CommentList comments = {this.props.article.comments} />
             </section>
         )
     }
 }
+
+export default toggleOpen(Article)
