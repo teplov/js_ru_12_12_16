@@ -3,29 +3,14 @@ import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 
 class CommentList extends Component {
-    static PropTypes = {
-      comments: PropTypes.array,
-      isOpen: PropTypes.bool
+    static propTypes = {
+        comments: PropTypes.array,
+        isOpen: PropTypes.bool,
+        toggleOpen: PropTypes.func
     }
 
     static defaultProps = {
         comments: []
-    }
-
-    componentWillMount() {
-        console.log('---', 1)
-    }
-
-    componentDidMount() {
-        console.log('---', 2)
-    }
-
-    componentWillUnmount() {
-        console.log('---', 3)
-    }
-
-    componentWillReceiveProps(nextProps) {
-        console.log('---', 'updating to toggle open', this.props.isOpen !== nextProps.isOpen)
     }
 
     render() {

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ArticleList from './components/ArticleList'
+import AppContainer from './components/AppContainer'
 import {articles} from './fixtures'
 
-ReactDOM.render(<ArticleList articles = {articles} />, document.getElementById('container'))
+ReactDOM.render(<AppContainer articles = {articles} />, document.getElementById('container'))

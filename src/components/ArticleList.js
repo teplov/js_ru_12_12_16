@@ -1,22 +1,19 @@
 import React, {PropTypes} from 'react'
+import {findDOMNode} from 'react-dom'
 import Article from './Article'
-import Chart from './Chart'
-import toggleOpen from '../decorators/toggleOpen'
+import accordion from '../decorators/accordion'
 
-export default class ArticleList extends React.Component {
-    static propTypes = {
-      articles: PropTypes.array.isRequired
-    }
-
-    static defaultProps = {
-        articles: []
-    }
-
-    state = {
-        openArticleId: null
-    }
-
+class ArticleList extends React.Component {
     render() {
+        const {articles, isOpenItem, toggleOpenItem} = this.props
+        const articleElements = articles.map(article =>
+            <li key={article.id}>
+                <Article article={article}
+                         isOpen={isOpenItem(article.id)}
+                         onClick={toggleOpenItem(article.id)}
+                         ref = {this.getArticleRef}
+                />
+            </li>)
         return (
             <div>
                 <h2>Article List</h2>
@@ -27,33 +24,15 @@ export default class ArticleList extends React.Component {
         )
     }
 
-
-    getArticle() {
-      const { articles } = this.props
-      const articleItems = articles.map(article => {
-          return (
-            <li key = {article.id}>
-              <Article
-                       onUpdate={this.onUpdate}
-                       isOpen={this.state.openArticleId == article.id}
-                       article = {article}
-              />
-            </li>
-          )
-      })
-      return <ul>{articleItems}</ul>
+    getArticleRef = (article) => {
+        this.article = article
+        console.log('---', findDOMNode(article))
     }
 
-    onUpdate = (val) => {
-      console.log('onUpdate', val);
-      this.toggleOpenArticle(val);
-    }
-
-    toggleOpenArticle = (id) => {
-     let state = this.state.openArticleId === id ? null : id;
-     console.log('sstate', this.state.openArticleId, id, state);
-       this.setState({
-           openArticleId: state
-       })
-    }
+ArticleList.propTypes = {
+    articles: PropTypes.array.isRequired,
+    isOpenItem: PropTypes.func.isRequired,
+    toggleOpenItem: PropTypes.func.isRequired
 }
+
+export default accordion(ArticleList)
