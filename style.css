@@ -33,7 +33,7 @@ BUTTON {
   outline: none;
   cursor: pointer;
   padding: 0px 20px;
-  margin: 10px 0px;
+  margin: 10px 2px;
 }
 
 
@@ -43,4 +43,23 @@ BUTTON {
 
 .show {
   display: inline-block;
+}
+INPUT {
+  width: 800px;
+  height: 30px;
+  padding:0 5px;
+  font-size: 14px;
+  border-radius: 2px;
+  border: 1px solid #d9d9d9;
+  margin: 2px;
+}
+
+TEXTAREA {
+  width: 800px;
+  height: 200px;
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 2px;
+  border: 1px solid #d9d9d9;
+  margin: 2px;
 }

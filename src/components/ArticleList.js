@@ -18,7 +18,8 @@ class ArticleList extends React.Component {
             <div>
                 <h2>Article List</h2>
                 <ul>
-                    {this.getArticle()}
+                    {/*some comment*/}
+                    {articleElements}
                 </ul>
             </div>
         )
@@ -28,6 +29,7 @@ class ArticleList extends React.Component {
         this.article = article
         console.log('---', findDOMNode(article))
     }
+}
 
 ArticleList.propTypes = {
     articles: PropTypes.array.isRequired,

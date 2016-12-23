@@ -13,11 +13,22 @@ class CommentList extends Component {
         comments: []
     }
 
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        user: '',
+        text: ''
+      }
+    }
+
+
     render() {
         return (
             <div>
                 {this.getLink()}
                 {this.getBody()}
+                {this.addComment()}
             </div>
         )
     }
@@ -36,6 +47,35 @@ class CommentList extends Component {
         if (!comments.length) return <p>No comments yet</p>
         const commentItems = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)
         return <ul>{commentItems}</ul>
+    }
+
+    addComment() {
+      return (
+        <div>
+          <p>Add your comment</p>
+          <input type="text" placeholder="Your name" value={ this.state.user } onChange={ this.handlerAddCommentUsername } /><br />
+          <textarea onChange={ this.handlerAddCommentText }>
+            { this.state.text }
+          </textarea>
+          <button onClick={ this.handlerAddCommentSubmit }>Submit</button>
+        </div>
+      )
+    }
+
+    handlerAddCommentUsername = (ev) => {
+      this.setState({
+        user: ev.target.value
+      });
+    }
+
+    handlerAddCommentText = (ev) => {
+      this.setState({
+        text: ev.target.value
+      });
+    }
+
+    handlerAddCommentSubmit = (ev) => {
+      console.log('Add comment', this.state);
     }
 }
 
