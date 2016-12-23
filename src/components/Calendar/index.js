@@ -42,9 +42,9 @@ export default class Calendar extends React.Component{
       <div>
         <button onClick={this.toggleOpen}>Select date</button>
         <span>
-          You chose from { from.toLocaleString("en-US", this.options) }
-          to { to.toLocaleString("en-US", this.options) }
-          <a href="." onClick={ this.handleResetClick }>Reset</a>
+          &nbsp;You chose from { from.toLocaleString("en-US", this.options) }
+          &nbsp;to { to.toLocaleString("en-US", this.options) }
+          &nbsp;<a href="." onClick={ this.handleResetClick }>Reset</a>
         </span>
         {this.getCalendar()}
       </div>

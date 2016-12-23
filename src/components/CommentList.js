@@ -54,9 +54,7 @@ class CommentList extends Component {
         <div>
           <p>Add your comment</p>
           <input type="text" placeholder="Your name" value={ this.state.user } onChange={ this.handlerAddCommentUsername } /><br />
-          <textarea onChange={ this.handlerAddCommentText }>
-            { this.state.text }
-          </textarea>
+          <textarea onChange={ this.handlerAddCommentText } value={ this.state.text } />
           <button onClick={ this.handlerAddCommentSubmit }>Submit</button>
         </div>
       )
@@ -76,6 +74,10 @@ class CommentList extends Component {
 
     handlerAddCommentSubmit = (ev) => {
       console.log('Add comment', this.state);
+      this.setState({
+        user: '',
+        text: ''
+      });
     }
 }
 
