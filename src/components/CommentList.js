@@ -15,7 +15,7 @@ class CommentList extends Component {
 
     constructor(props) {
       super(props);
-
+        //форма заслуживает отдельного компонента
       this.state = {
         user: '',
         text: ''
