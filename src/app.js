@@ -1,6 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import AppContainer from './components/AppContainer'
-import {articles} from './fixtures'
+import store from './store'
+import { Provider } from 'react-redux'
 
-ReactDOM.render(<AppContainer articles = {articles} />, document.getElementById('container'))
+
+ReactDOM.render(
+    <Provider store = {store}>
+        <AppContainer />
+    </Provider>, document.getElementById('container'))
